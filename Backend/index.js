@@ -111,18 +111,49 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-// Online users tracking
+// Online users tracking. Each user can have multiple sockets open, e.g. browser tabs.
 const onlineUsers = new Map();
+
+const getOnlineUserIds = () => Array.from(onlineUsers.keys());
+
+const addOnlineSocket = (userId, socketId) => {
+  if (!onlineUsers.has(userId)) {
+    onlineUsers.set(userId, new Set());
+  }
+
+  onlineUsers.get(userId).add(socketId);
+};
+
+const removeOnlineSocket = (userId, socketId) => {
+  const userSockets = onlineUsers.get(userId);
+
+  if (!userSockets) {
+    return false;
+  }
+
+  userSockets.delete(socketId);
+
+  if (userSockets.size === 0) {
+    onlineUsers.delete(userId);
+    return true;
+  }
+
+  return false;
+};
 
 io.on("connection", (socket) => {
   console.log("🔌 User Connected:", socket.id);
 
   // User comes online
   socket.on("user:online", (userId) => {
-    socket.userId = userId; // Store userId in socket for disconnect
-    onlineUsers.set(userId, socket.id);
+    if (socket.userId && socket.userId !== userId) {
+      removeOnlineSocket(socket.userId, socket.id);
+    }
 
-    io.emit("users:online", Array.from(onlineUsers.keys()));
+    socket.userId = userId; // Store userId in socket for disconnect
+    addOnlineSocket(userId, socket.id);
+
+    io.emit("users:online", getOnlineUserIds());
     console.log(`✅ User ${userId} is online. Total online:`, onlineUsers.size);
   });
 
@@ -156,20 +187,24 @@ io.on("connection", (socket) => {
 
     // Remove from online users using stored userId
     if (socket.userId) {
-      onlineUsers.delete(socket.userId);
-      io.emit("users:online", Array.from(onlineUsers.keys()));
+      const userWentOffline = removeOnlineSocket(socket.userId, socket.id);
+      io.emit("users:online", getOnlineUserIds());
       console.log(
-        `❌ User ${socket.userId} removed. Total online:`,
+        `❌ Socket ${socket.id} removed for user ${socket.userId}. Total online:`,
         onlineUsers.size
       );
+
+      if (!userWentOffline) {
+        console.log(`User ${socket.userId} still has another active socket`);
+      }
     }
   });
 
   // Manual offline event (optional, for explicit logout)
   socket.on("user:offline", (userId) => {
-    onlineUsers.delete(userId);
-    io.emit("users:online", Array.from(onlineUsers.keys()));
-    console.log(`👋 User ${userId} went offline manually`);
+    removeOnlineSocket(userId, socket.id);
+    io.emit("users:online", getOnlineUserIds());
+    console.log(`👋 Socket ${socket.id} went offline manually for user ${userId}`);
   });
 });
 
