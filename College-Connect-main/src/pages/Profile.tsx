@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_BASE_URL } from "../config/apiConfig";
 
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileBio from "../components/ProfileBio";
@@ -75,7 +76,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [fetchingProfile, setFetchingProfile] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = API_BASE_URL;
 
   // Check if viewing own profile or someone else's
   const isOwnProfile = !userId || userId === currentUser?._id;

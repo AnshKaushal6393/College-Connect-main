@@ -1,8 +1,9 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../config/apiConfig';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "https://college-connect-backend-51sw.onrender.com",
+  baseURL: API_BASE_URL,
   withCredentials: true,
   timeout: 15000,
   headers: {

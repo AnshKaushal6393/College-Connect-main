@@ -3,6 +3,7 @@ import { Search, MessageCircle, Code2, Users, Mail, Linkedin, Github, ExternalLi
 import axios from "axios";
 import toast from "react-hot-toast";
 import UserProfileModal from "../components/UserProfileModal";
+import { API_BASE_URL } from "../config/apiConfig";
 
 interface Senior {
   _id: string;
@@ -29,7 +30,7 @@ const Seniors = () => {
   const [skillFilter, setSkillFilter] = useState("");
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = API_BASE_URL;
 
   useEffect(() => {
     fetchSeniors();

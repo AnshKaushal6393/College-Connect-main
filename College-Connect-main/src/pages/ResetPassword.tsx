@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Lock, CheckCircle } from "lucide-react";
-import axios from "axios";
 import toast from "react-hot-toast";
+import api from "../services/api";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -27,7 +27,7 @@ const ResetPassword = () => {
         return;
       }
       try {
-        await axios.post("http://localhost:3000/api/auth/validate-token", {
+        await api.post("/auth/validate-token", {
           token,
         });
         setValidToken(true);
@@ -62,7 +62,7 @@ const ResetPassword = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:3000/api/auth/reset-password", {
+      await api.post("/auth/reset-password", {
         token,
         newPassword: password,
       });

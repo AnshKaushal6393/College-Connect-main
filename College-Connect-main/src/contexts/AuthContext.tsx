@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_BASE_URL } from "../config/apiConfig";
 
 interface User {
   _id: string;
@@ -68,8 +69,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL + "/auth";
-  const PROFILE_URL = import.meta.env.VITE_API_URL + "/profile";
+  const AUTH_URL = `${API_BASE_URL}/auth`;
+  const PROFILE_URL = `${API_BASE_URL}/profile`;
 
   // ⭐ FIXED: Load token on mount and fetch profile
   useEffect(() => {
@@ -125,7 +126,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         if (verificationFile) formData.append("studentId", verificationFile);
       }
 
-      const res = await axios.post(`${API_URL}/signup`, formData, {
+      const res = await axios.post(`${AUTH_URL}/signup`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -164,7 +165,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoading(true);
     try {
       const res = await axios.post(
-        `${API_URL}/login`,
+        `${AUTH_URL}/login`,
         { email, password },
         { withCredentials: true }
       );
@@ -212,7 +213,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // ⭐ FIXED: Logout - Remove token from localStorage
   const logout = async () => {
     try {
-      await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+      await axios.post(`${AUTH_URL}/logout`, {}, { withCredentials: true });
       
       // ⭐ Clear localStorage and axios header
       localStorage.removeItem("token");
@@ -273,7 +274,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const forgotPassword = async (email: string) => {
     try {
       await axios.post(
-        `${API_URL}/forgot-password`,
+        `${AUTH_URL}/forgot-password`,
         { email },
         { withCredentials: true }
       );
@@ -288,7 +289,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const resetPassword = async (token: string, newPassword: string) => {
     try {
       await axios.post(
-        `${API_URL}/reset-password`,
+        `${AUTH_URL}/reset-password`,
         { token, newPassword },
         { withCredentials: true }
       );

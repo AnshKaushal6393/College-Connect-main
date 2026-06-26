@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { useAuth } from "./AuthContext";
+import { SOCKET_BASE_URL } from "../config/apiConfig";
 
 interface SocketContextType {
   socket: Socket | null;
@@ -38,7 +39,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
 
     console.log("🔌 Creating socket for user:", currentUser._id);
 
-    const newSocket = io("https://college-connect-backend-51sw.onrender.com", {
+    const newSocket = io(SOCKET_BASE_URL, {
       withCredentials: true,
       autoConnect: true,
       reconnection: true,

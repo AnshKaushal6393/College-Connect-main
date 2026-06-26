@@ -3,6 +3,7 @@ import { Mail, ArrowLeft, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_BASE_URL } from "../config/apiConfig";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const ForgotPassword = () => {
   const [emailSent, setEmailSent] = useState(false);
 
   
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = API_BASE_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

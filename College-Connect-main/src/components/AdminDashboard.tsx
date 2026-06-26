@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/apiConfig";
 import {
   Users,
   CheckCircle,
@@ -129,7 +130,7 @@ export default function AdminDashboard() {
   const [showAnalytics, setShowAnalytics] = useState(false);
   const [timeRange, setTimeRange] = useState("30");
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = API_BASE_URL;
 
   useEffect(() => {
     fetchData();

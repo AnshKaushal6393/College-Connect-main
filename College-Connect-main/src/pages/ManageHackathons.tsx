@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import { API_BASE_URL } from "../config/apiConfig";
 
 interface Hackathon {
   _id?: string;
@@ -51,7 +52,7 @@ function ManageHackathons() {
   const [typeFilter, setTypeFilter] = useState("all");
   const [showFilters, setShowFilters] = useState(false);
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = API_BASE_URL;
 
   const emptyForm: Hackathon = {
     title: "",

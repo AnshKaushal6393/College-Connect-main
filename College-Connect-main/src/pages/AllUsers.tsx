@@ -16,6 +16,7 @@ import {
   Eye,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "../config/apiConfig";
 
 interface User {
   _id: string;
@@ -58,7 +59,7 @@ function AllUsers() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 20;
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = API_BASE_URL;
 
   useEffect(() => {
     fetchUsers();

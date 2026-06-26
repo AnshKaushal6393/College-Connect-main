@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
+import { API_BASE_URL } from "../config/apiConfig";
 
 interface FeatureCardProps {
   Icon: React.ComponentType<{ className?: string }>;
@@ -119,7 +120,7 @@ const Home: FC = () => {
   });
   const [loading, setLoading] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = API_BASE_URL;
 
   // Fetch real-time stats
   useEffect(() => {

@@ -10,6 +10,7 @@ import {
   Activity,
   AlertCircle,
 } from "lucide-react";
+import { API_BASE_URL } from "../config/apiConfig";
 
 interface AnalyticsData {
   userGrowth: { date: string; count: number }[];
@@ -42,7 +43,7 @@ const Analytics = () => {
     setError(null);
     
     try {
-      const API_URL = import.meta.env.VITE_API_URL;
+      const API_URL = API_BASE_URL;
       const res = await fetch(`${API_URL}/admin/analytics?days=${timeRange}`, {
         credentials: "include",
       });
