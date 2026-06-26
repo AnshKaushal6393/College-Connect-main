@@ -1,12 +1,10 @@
 // src/components/Footer.tsx
-import { Github, Linkedin, Twitter, ArrowUp, MailIcon, Heart, Users, Instagram, Send } from "lucide-react";
+import { Github, Twitter, ArrowUp, MailIcon, Heart, Users, Instagram, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [showTop, setShowTop] = useState(false);
-  const [feedback, setFeedback] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setShowTop(window.scrollY > 200);
@@ -15,15 +13,6 @@ const Footer = () => {
   }, []);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
-  const handleFeedbackSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (feedback.trim()) {
-      setSubmitted(true);
-      setFeedback("");
-      setTimeout(() => setSubmitted(false), 4000);
-    }
-  };
 
   return (
     <footer className="relative mt-20">

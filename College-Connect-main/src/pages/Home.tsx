@@ -6,10 +6,7 @@ import {
   Network, 
   Trophy, 
   Rocket,
-  TrendingUp,
   Award,
-  Calendar,
-  MessageSquare,
   ArrowRight,
   Zap,
   Target,
@@ -118,7 +115,7 @@ const Home: FC = () => {
     resources: 0,
     teams: 0
   });
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
   const API_URL = API_BASE_URL;
 
@@ -481,27 +478,5 @@ const Home: FC = () => {
     </div>
   );
 };
-
-// Add this to your global CSS (tailwind.config.js or global.css)
-const styles = `
-@keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-`;
 
 export default Home;

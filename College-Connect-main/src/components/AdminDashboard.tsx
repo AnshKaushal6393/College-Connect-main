@@ -338,12 +338,6 @@ export default function AdminDashboard() {
   const maxGrowth = analytics
     ? Math.max(...analytics.userGrowth.map((d) => d.count), 1)
     : 1;
-  const maxDownloads = analytics
-    ? Math.max(...analytics.resourceDownloads.map((d) => d.downloads), 1)
-    : 1;
-  const maxActivity = analytics
-    ? Math.max(...analytics.peakHours.map((h) => h.activity), 1)
-    : 1;
   const maxParticipation = analytics
     ? Math.max(...analytics.hackathonParticipation.map((h) => h.participants), 1)
     : 1;

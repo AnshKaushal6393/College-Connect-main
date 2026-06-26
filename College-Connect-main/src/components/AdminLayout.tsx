@@ -9,9 +9,6 @@ import {
   LogOut,
   Menu,
   X,
-  TrendingUp,
-  TrendingUpIcon,
-  UserCog,
   BarChart3,
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
@@ -83,7 +80,7 @@ const AdminLayout = () => {
     try {
       await logout();
       toast.success("Logged out successfully");
-    } catch (error) {
+    } catch {
       toast.error("Failed to logout");
     }
   };

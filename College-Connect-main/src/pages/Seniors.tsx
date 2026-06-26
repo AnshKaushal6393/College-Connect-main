@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Search, MessageCircle, Code2, Users, Mail, Linkedin, Github, ExternalLink, Eye } from "lucide-react";
+import { Search, MessageCircle, Code2, Users, Mail, Linkedin, Github, ExternalLink } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import UserProfileModal from "../components/UserProfileModal";
 import { API_BASE_URL } from "../config/apiConfig";
 
 interface Senior {
@@ -28,7 +27,6 @@ const Seniors = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [branchFilter, setBranchFilter] = useState("");
   const [skillFilter, setSkillFilter] = useState("");
-  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 
   const API_URL = API_BASE_URL;
 

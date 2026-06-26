@@ -3,7 +3,6 @@ import {
   Calendar,
   Users,
   Search,
-  Filter,
   Mail,
   Linkedin,
   Github,

@@ -31,7 +31,7 @@ const ResetPassword = () => {
           token,
         });
         setValidToken(true);
-      } catch (err: any) {
+      } catch {
         toast.error("Invalid or expired link");
         navigate("/forgot-password");
       }

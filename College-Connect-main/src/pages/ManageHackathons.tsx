@@ -105,7 +105,7 @@ function ManageHackathons() {
         withCredentials: true,
       });
       setHackathons(res.data.hackathons);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load hackathons");
     }
   };
@@ -221,7 +221,7 @@ function ManageHackathons() {
       });
       toast.success("Hackathon deleted successfully");
       fetchHackathons();
-    } catch (error) {
+    } catch {
       toast.error("Failed to delete hackathon");
     }
   };

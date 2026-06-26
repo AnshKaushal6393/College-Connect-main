@@ -196,9 +196,7 @@ const Signup = () => {
     setEmailError("");
   };
 
-  interface HandleSubmitEvent extends React.FormEvent<HTMLFormElement> {}
-
-  const handleSubmit = async (e: HandleSubmitEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("handle submit triggered");
     

@@ -41,7 +41,7 @@ const Profile = () => {
   console.log("currentUser:", currentUser);
   if (!currentUser) {
     console.log("❌ No currentUser, redirecting...");
-    return (
+    void (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <p className="text-gray-600">Please login to view profiles</p>
@@ -201,6 +201,16 @@ const Profile = () => {
       setLoading(false);
     }
   };
+
+  if (!currentUser) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <p className="text-gray-600">Please login to view profiles</p>
+        </div>
+      </div>
+    );
+  }
 
   if (fetchingProfile || !profileUser) {
     return (

@@ -415,11 +415,6 @@ const TeamBuilder = () => {
     );
   };
 
-  const getApplicationStatus = (request: any) => {
-    if (!currentUser) return null;
-    return request.myApplication?.status;
-  };
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -758,6 +753,8 @@ const TeamRequestsList: React.FC<TeamRequestsListProps> = ({
   onBookmark,
   isBookmarked,
 }) => {
+  const navigate = useNavigate();
+
   if (requests.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow p-12 text-center">
@@ -769,8 +766,6 @@ const TeamRequestsList: React.FC<TeamRequestsListProps> = ({
       </div>
     );
   }
-  const navigate = useNavigate();
-
   const handleStartChat = async (participantId:string) => {
     if(!currentUser) {
        toast.error("Please login to chat");

@@ -3,16 +3,13 @@ import {
   Search,
   Filter,
   BookOpen,
-  ThumbsUp,
   Download,
   Share2,
   Upload,
   X,
   Eye,
   Heart,
-  MessageCircle,
   Trash2,
-  Edit,
   FileText,
   Image as ImageIcon,
   Video,
@@ -77,13 +74,13 @@ const Resources = () => {
   useEffect(() => {
     fetchResources();
     fetchStats();
-  }, [categoryFilter, sortBy]);
+  }, [categoryFilter, sortBy, debouncedSearch]);
 
   const fetchResources = async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
-      if (searchQuery) params.append("search", searchQuery);
+      if (debouncedSearch) params.append("search", debouncedSearch);
       if (categoryFilter !== "all") params.append("category", categoryFilter);
       if (sortBy) params.append("sortBy", sortBy);
 
